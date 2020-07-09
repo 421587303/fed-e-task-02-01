@@ -131,11 +131,11 @@ function useRef() {
         searchPath: ["dist", "."],
       })
     )
-    .pipe(plugins.if(/\.js$/, uglify()))
-    .pipe(plugins.if(/\.css$/, cleanCss()))
+    .pipe(plugins.if(/\.js$/ && production, uglify()))
+    .pipe(plugins.if(/\.css$/ && production, cleanCss()))
     .pipe(
       plugins.if(
-        /\.html$/,
+        /\.html$/ && production,
         htmlmin({
           collapseWhitespace: true,
           minifyCSS: true,
